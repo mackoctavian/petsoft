@@ -11,15 +11,17 @@ const config: Config = {
   	extend: {
   		colors: {
   			background: 'var(--background)',
-  			foreground: 'var(--foreground)'
+  			foreground: 'var(--foreground)',
+			light: 'rgba(0,0,0, 0.08)'
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		
   	}
   },
   plugins: [require("tailwindcss-animate")],
-};
+}; 
 export default config;
