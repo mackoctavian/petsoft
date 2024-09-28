@@ -6,14 +6,14 @@ import React from "react";
 import PetButton from "./pet-button";
 
 export default function PetDetails() {
-  const { selectedPet } = usePetContext();
+  const { selectedPet, handleCheckoutPet } = usePetContext();
   return (
     <section className="flex flex-col h-full w-full">
       {!selectedPet ? (
         <EmptyView />
       ) : (
         <>
-          <TopBar pet={selectedPet} />
+          <TopBar pet={selectedPet} checkout={handleCheckoutPet} />
           <OtherInfo pet={selectedPet} />
           <Notes pet={selectedPet} />
         </>
@@ -22,7 +22,12 @@ export default function PetDetails() {
   );
 }
 
-function TopBar({ pet }: { pet: Pet }) {
+type TopBarProps = {
+  pet: Pet;
+  checkout: (id: string) => void;
+};
+
+function TopBar({ pet, checkout }: TopBarProps) {
   return (
     <div className="flex items-center bg-white px-8 py-5 border-b  border-light">
       <Image
@@ -35,7 +40,9 @@ function TopBar({ pet }: { pet: Pet }) {
       <h2 className="text-3xl font-semibold leading-7 ml-5">{pet?.name}</h2>
       <div className="ml-auto space-x-2">
         <PetButton actionType="edit">Edit</PetButton>
-        <PetButton actionType="checkout">Checkout</PetButton>
+        <PetButton actionType="checkout" clickAction={() => checkout(pet.id)}>
+          Checkout
+        </PetButton>
       </div>
     </div>
   );
